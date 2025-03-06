@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Percentage Calculator</title>
+    <script src="Grade.js"></script>
+
+    <style>
+        body{
+            background-image: linear-gradient(120deg,#f6d365 0%, #fda085 100%);
+        }
+        h2 {
+            color: orange;
+            font-size: 35px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #333;
+            text-align: center;
+            text-shadow: 7px 5px 5px black;
+        }
+
+
+        div label {
+            font-size: 20px;
+            font-weight: 500;
+            color: #333;
+            width: 80%;
+            margin: 0px auto;
+        }
+
+        div input {
+            padding: 10px;
+            font-size: 20px;
+            width: 80%;
+            margin: 10px auto;
+        }
+
+        div button {
+            padding: 10px;
+            font-size: 25px;
+            border: 5px solid orange;
+            background-color: orange;
+            color: white;
+            width: 80%;
+            margin: 10px auto;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 2s;
+        }
+
+        div button:hover {
+            border: 5px solid aqua;
+            background-color: aqua;
+            color: black;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: row;
+            font-family: Arial, sans-serif;
+            justify-content: center;
+            align-items: center;
+            background-image: linear-gradient(135deg, #c3cfe2 0%, #f5f7fa 100%);
+            width: 75%;
+            /* max-width: 600px; */
+            height: auto;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 12px black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main">
+        <div class="gradecalculator">
+            <h2>Grade Calculator</h2>
+            <label for="math">Math:</label>
+            <input type="number" id="math"><br><br>
+            <label for="english">English:</label>
+            <input type="number" id="english"><br><br>
+            <label for="science">Science:</label>
+            <input type="number" id="science"><br><br>
+            <label for="hindi">Hindi:</label>
+            <input type="number" id="hindi"><br><br>
+
+            <button onclick="calculatepercentage()">Calculate</button><br><br>
+        </div>
+
+        <div class="right">
+            <label for="obtainedmarks">Obtainedmarks: </label>
+            <input type="number" id="obtainedmarks" readonly><br>
+            <label for="percentage">Percentage:</label>
+            <input type="text" id="percentage" readonly><br><br>
+            <label for="grade">Grade:</label>
+            <input type="text" id="grade" readonly><br><br>
+            <label for="result">Result:</label>
+            <input type="text" id="result" readonly><br><br>
+        </div>
+    </div>
+
+</body>
+
+</html>

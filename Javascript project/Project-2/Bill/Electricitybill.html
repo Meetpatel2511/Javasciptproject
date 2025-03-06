@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electricity Bill</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: linear-gradient(45deg, #874da2 0%, #c43a30 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .container {
+            background-image: linear-gradient(to top, #dad4ec 0%, #dad4ec 1%, #f3e7e9 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #e24b4b;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 30px;
+            text-transform: uppercase;
+            text-shadow: 0px 5px 5px black;
+        }
+
+        .input {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            color: #34495e;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: large;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #e24b4b;
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background: #e24b4b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 1s ease;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        #result {
+            margin-top: 1.5rem;
+            text-align: center;
+            padding: 1rem;
+            font-size: 18px;
+
+        }
+    </style>
+    <script src="electricityBill.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Electricity Bill Calculator</h1>
+        <div class="input">
+            <label for="unit"><strong>Enter units consumed:</strong></label>
+            <input type="number" id="units" placeholder="Enter units">
+        </div>
+        <button onclick="calculateBill()">Calculate Bill</button>
+
+        <div id="result"></div>
+    </div>
+
+    
+</body>
+</html>

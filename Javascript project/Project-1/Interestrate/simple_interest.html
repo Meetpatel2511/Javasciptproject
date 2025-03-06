@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Interest Calculator</title>
+    <script src="Interestrate.js"></script>
+    <style>
+        body{
+            font-family: 'Arial', sans-serif;
+            background-image: linear-gradient(120deg,#a1c4fd 0%, #c2e9fb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .calculator{
+            background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 400px;
+        }
+        h1{
+            color: #4ba6e2;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 30px;
+            text-transform: uppercase;
+            text-shadow: 0px 5px 5px black;
+        }
+
+        .input{
+            margin-bottom: 1.5rem;
+        }
+
+        label{
+            display: block;
+            color: #34495e;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input{
+            width: 90%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus{
+            outline: none;
+            border-color: #3498db;
+        }
+
+        button{
+            width: 100%;
+            padding: 1rem;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 1s ease;
+        }
+
+        button:hover{
+            background: #2980b9;
+        }
+
+        #result{
+            margin-top: 1.5rem;
+            text-align: center;
+            padding: 1rem;
+            font-size: 18px;
+
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <h1>Simple Interest Calculator</h1>
+        <div class="input">
+            <label for="principal">Principal Amount($)</label>
+            <input type="number" id="principal" placeholder="Enter amount">
+        </div>
+        <div class="input">
+            <label for="rate">Interest Rate (%)</label>
+            <input type="number" id="rate" placeholder="Enter rate">
+        </div>
+        <div class="input">
+            <label for="time">Time(in years)</label>
+            <input type="number" id="time" placeholder="Enter years">
+        </div>
+        <button onclick="calculateInterest()">Caculate</button>
+        <div id="result"></div>
+    </div>
+    
+</body>
+</html>
