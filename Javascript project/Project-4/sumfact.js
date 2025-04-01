@@ -8,12 +8,7 @@ let fact=1; // Initialize a variable to store the factorial of the number
 
 while(no>0){ // Loop until no is greater than 0
     sum+=no;
-    no--;
-}
-
-
-while(no>0){
-    fact*=no;
+     fact*=no;
     no--;
 }
 
