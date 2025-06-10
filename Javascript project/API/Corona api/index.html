@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COVID-19 Statistics Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="container mx-auto p-4">
+    <!-- Header -->
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">COVID-19 Statistics Dashboard</h1>
+
+    <!-- Search Form -->
+    <form id="searchForm" class="mb-8 flex justify-center">
+      <input
+        id="countryInput"
+        type="text"
+        placeholder="Enter country name (e.g., USA)"
+        class="p-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+      <button
+        type="submit"
+        class="p-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600"
+      >
+        Search
+      </button>
+    </form>
+
+    <!-- Global Stats -->
+    <div id="globalStats" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div class="bg-white p-4 rounded-lg shadow-md text-center">
+        <h2 class="text-lg font-semibold text-gray-700">Total Cases</h2>
+        <p id="totalCases" class="text-2xl font-bold text-blue-600">Loading...</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md text-center">
+        <h2 class="text-lg font-semibold text-gray-700">Total Deaths</h2>
+        <p id="totalDeaths" class="text-2xl font-bold text-red-600">Loading...</p>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow-md text-center">
+        <h2 class="text-lg font-semibold text-gray-700">Total Recovered</h2>
+        <p id="totalRecovered" class="text-2xl font-bold text-green-600">Loading...</p>
+      </div>
+    </div>
+
+    <!-- Country Stats -->
+    <div id="countryStats" class="bg-white p-6 rounded-lg shadow-md hidden">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Country: <span id="countryName"></span></h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="text-center">
+          <p class="text-gray-600">Current Cases</p>
+          <p id="currentCases" class="text-lg font-bold text-blue-600">Loading...</p>
+        </div>
+        <div class="text-center">
+          <p class="text-gray-600">Total Deaths</p>
+          <p id="countryDeaths" class="text-lg font-bold text-red-600">Loading...</p>
+        </div>
+        <div class="text-center">
+          <p class="text-gray-600">Total Recovered</p>
+          <p id="countryRecovered" class="text-lg font-bold text-green-600">Loading...</p>
+        </div>
+        <div class="text-center">
+          <p class="text-gray-600">Cases Today</p>
+          <p id="todayCases" class="text-lg font-bold text-blue-600">Loading...</p>
+        </div>
+        <div class="text-center">
+          <p class="text-gray-600">Deaths Today</p>
+          <p id="todayDeaths" class="text-lg font-bold text-red-600">Loading...</p>
+        </div>
+        <div class="text-center">
+          <p class="text-gray-600">Population</p>
+          <p id="population" class="text-lg font-bold text-gray-600">Loading...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // API endpoint for Disease.sh COVID-19 data
+    const apiUrl = "https://disease.sh/v3/covid-19";
+
+    // Get DOM elements
+    const searchForm = document.getElementById('searchForm');
+    const countryInput = document.getElementById('countryInput');
+    const globalStats = document.getElementById('globalStats');
+    const countryStats = document.getElementById('countryStats');
+    const totalCases = document.getElementById('totalCases');
+    const totalDeaths = document.getElementById('totalDeaths');
+    const totalRecovered = document.getElementById('totalRecovered');
+    const countryName = document.getElementById('countryName');
+    const currentCases = document.getElementById('currentCases');
+    const countryDeaths = document.getElementById('countryDeaths');
+    const countryRecovered = document.getElementById('countryRecovered');
+    const todayCases = document.getElementById('todayCases');
+    const todayDeaths = document.getElementById('todayDeaths');
+    const population = document.getElementById('population');
+
+    // Fetch global stats on page load
+    fetchGlobalStats();
+
+    // Handle form submission
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const country = countryInput.value.trim();
+      if (country) fetchCountryStats(country);
+    });
+
+    // Fetch global COVID-19 stats
+    async function fetchGlobalStats() {
+      try {
+        const response = await fetch(`${apiUrl}/all`);
+        const data = await response.json();
+        totalCases.textContent = data.cases.toLocaleString();
+        totalDeaths.textContent = data.deaths.toLocaleString();
+        totalRecovered.textContent = data.recovered.toLocaleString();
+      } catch (error) {
+        console.error('Error fetching global stats:', error);
+        totalCases.textContent = 'Error';
+        totalDeaths.textContent = 'Error';
+        totalRecovered.textContent = 'Error';
+      }
+    }
+
+    // Fetch country-specific COVID-19 stats
+    async function fetchCountryStats(country) {
+      try {
+        const response = await fetch(`${apiUrl}/countries/${country}`);
+        const data = await response.json();
+        if (data.message) {
+          alert('Country not found!');
+          countryStats.classList.add('hidden');
+          return;
+        }
+        countryStats.classList.remove('hidden');
+        countryName.textContent = data.country;
+        currentCases.textContent = data.active.toLocaleString();
+        countryDeaths.textContent = data.deaths.toLocaleString();
+        countryRecovered.textContent = data.recovered.toLocaleString();
+        todayCases.textContent = data.todayCases.toLocaleString();
+        todayDeaths.textContent = data.todayDeaths.toLocaleString();
+        population.textContent = data.population.toLocaleString();
+      } catch (error) {
+        console.error('Error fetching country stats:', error);
+        alert('Failed to fetch data. Please try again.');
+        countryStats.classList.add('hidden');
+      }
+    }
+  </script>
+</body>
+</html>
